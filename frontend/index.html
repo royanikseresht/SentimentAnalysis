@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="styles.css">  <!-- Link to your updated CSS -->
+</head>    
+<body>
+    <nav class="navbar">
+        <button id="themeToggle" class="theme-toggle-btn">🌙</button> <!-- Dark Mode Button -->
+        <div class="navbar-links">
+            <a href="#aboutMe">About Me</a>
+            <a href="https://github.com/royanikseresht" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/royanikseresht" target="_blank">LinkedIn</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+        <textarea id="textInput" rows="5" cols="40" placeholder="Enter your text here"></textarea>
+        <br>
+        <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+        
+        <div id="loading" class="loading-spinner" style="display: none;">
+            <img src="https://i.gifer.com/ZZ5H.gif" alt="loading" />
+        </div>
+        
+        <div id="result" class="result-box" style="display: none;"></div>
+    </div>
+
+    <div id="aboutMeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>About Me</h2>
+            <!-- Add the image here -->
+            <img src="/images/profile.jpg" alt="Your Name" class="about-me-image" />
+            <p>Hi! I'm Roya, a passionate developer specializing in AI, ML, and web development.</p>
+            <p>I love creating projects that merge backend and frontend technologies.</p>
+            <p>Check out my GitHub for more projects or connect with me on LinkedIn!</p>
+        </div>
+    </div>
+    
+    <script>
+        function analyzeSentiment() {
+            const text = document.getElementById("textInput").value;
+
+            if (!text.trim()) {
+                alert("Please enter some text to analyze.");
+                return;
+            }
+
+            // Show loading spinner
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("result").style.display = "none";
+
+            fetch("http://127.0.0.1:5000/analyze", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ "text": text })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById("result");
+                resultDiv.style.display = "block";
+                resultDiv.textContent = `Sentiment: ${data.label}, Score: ${data.score.toFixed(2)}`;
+                resultDiv.className = data.label.toLowerCase();
+                
+                // Hide loading spinner
+                document.getElementById("loading").style.display = "none";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("There was an error with the request.");
+                document.getElementById("loading").style.display = "none";
+            });
+        }
+
+        // Dark Mode Toggle function
+        document.addEventListener("DOMContentLoaded", function () {
+            const darkModeButton = document.getElementById("themeToggle");
+            
+            darkModeButton.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+                
+                // Change the button text when switching modes
+                if (document.body.classList.contains("dark-mode")) {
+                    darkModeButton.textContent = "☀️"; // Sun icon for Light Mode
+                } else {
+                    darkModeButton.textContent = "🌙"; // Moon icon for Dark Mode
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("aboutMeModal");
+            const aboutMeLink = document.querySelector(".navbar-links a[href='#aboutMe']");
+            const closeBtn = document.querySelector(".modal .close");
+
+            aboutMeLink.addEventListener("click", function (event) {
+                event.preventDefault();
+                modal.style.display = "flex";
+            });
+
+            closeBtn.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        });
+
+        // Prevent right-click
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();  // Disable right-click
+        });
+
+        // Prevent text selection
+        document.addEventListener("selectstart", function(e) {
+            e.preventDefault();  // Disable text selection
+        });
+
+        // Prevent image dragging
+        document.addEventListener("dragstart", function(e) {
+            if (e.target.tagName === "IMG") {
+                e.preventDefault();  // Disable dragging images
+            }
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,276 @@
+/* Default Light Mode styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-block-size: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar styling */
+.navbar {
+    inline-size: 100%;
+    background-color: #b0b0b0;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;  /* Distribute space between theme toggle and navbar links */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    inset-inline-start: 0;
+    z-index: 100;
+}
+
+/* Theme toggle button styling */
+.navbar .theme-toggle-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Navbar links container styling */
+.navbar .navbar-links {
+    display: flex;
+    align-items: center;
+    margin-inline-end: 40px;
+}
+
+/* Navbar link styling */
+.navbar .navbar-links a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+/* Navbar link hover effect */
+.navbar .navbar-links a:hover {
+    color: #585858;
+}
+
+/* Dark Mode styles */
+body.dark-mode {
+    background-color: #2C2C2C;
+    color: #f1f1f1;
+}
+
+body.dark-mode .navbar {
+    background-color: #1f1f1f;
+}
+
+body.dark-mode .navbar .theme-toggle-btn {
+    color: #fff;
+}
+
+body.dark-mode .navbar .navbar-links a {
+    color: #ddd;
+}
+
+/* Container styling */
+.container {
+    margin-block-start: 180px; /* Increased margin to move the container lower */
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-inline-size: 500px;
+    inline-size: 100%;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+
+/* Dark Mode container styling */
+body.dark-mode .container {
+    background-color: #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Title styling */
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-block-end: 20px;
+}
+
+/* Textarea styling */
+#textInput {
+    inline-size: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Dark Mode input field */
+body.dark-mode #textInput {
+    background-color: #555;
+    border-color: #888;
+    color: white;
+}
+
+#textInput:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Button styling */
+button {
+    background-color: #7a7a7a;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: rgb(175, 175, 175);
+    transform: scale(1.05);
+}
+
+/* Result box styling */
+#result {
+    margin-block-start: 20px;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    display: none;
+}
+
+.positive {
+    background-color: #c8e6c9;
+    color: #388e3c;
+}
+
+.negative {
+    background-color: #ffcdd2;
+    color: #d32f2f;
+}
+
+.neutral {
+    background-color: #f0f0f0;
+    color: #757575;
+}
+
+/* Dark Mode result box */
+body.dark-mode #result {
+    color: #f1f1f1;
+}
+
+body.dark-mode .positive {
+    background-color: #3c6e47;
+    color: #388e3c;
+}
+
+body.dark-mode .negative {
+    background-color: #9e2a2a;
+    color: #d32f2f;
+}
+
+body.dark-mode .neutral {
+    background-color: #333;
+    color: #b5b5b5;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Light mode modal */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: black;
+}
+
+/* Dark mode modal */
+.dark-mode .modal-content {
+    background: #1e1e1e;
+    color: #f5f5f5;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Close button */
+.close {
+    float: inline-end;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+}
+
+.dark-mode .close {
+    color: white;
+}
+
+/* About Me image (remains the same in both modes) */
+.about-me-image {
+    inline-size: 100px;  /* Set the size of the image */
+    block-size: 100px;
+    border-radius: 50%;  /* Makes it rounded */
+    object-fit: cover;  /* Ensures the image keeps its aspect ratio */
+    margin-block-end: 20px;  /* Adds some space below the image */
+    border: 2px solid #ddd;
+}
+
+.dark-mode .about-me-image {
+    border: 2px solid #555;
+}
+
+
+/* Loading spinner */
+.loading-spinner {
+    margin-block-start: 20px;
+}
+
+.loading-spinner img {
+    inline-size: 50px;
+    block-size: 50px;
+    animation: rotate 2s linear infinite;
+}
+
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    #textInput {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}
